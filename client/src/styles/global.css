@@ -8,3 +8,185 @@ body {
   background: #f5f5f5;
   font-family: Arial, sans-serif;
 }
+
+/* Hero */
+.home-hero {
+  background: linear-gradient(90deg, #0f0f0f, #030533);
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.btn-hero {
+  background: #00bfff;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.btn-hero:hover {
+  background: #007bff;
+}
+
+/* Carrusel horizontal clásico (Ofertas) */
+.carrusel-horizontal {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 20px;
+}
+
+.carrusel-horizontal::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carrusel-horizontal::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 4px;
+}
+
+.card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Categorías */
+.categorias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.categoria-card {
+  background: #222;
+  color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.categoria-card:hover {
+  background: #333;
+}
+
+/* Banners horizontales grandes (Novedades) */
+.banner-slider-container {
+  position: relative;
+  width: 100%;
+  height: 69vh;       /* altura fija y consistente */
+  overflow: hidden;
+}
+
+.banner-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;       /* llena todo el espacio */
+  background-position: center;  /* centrada */
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.banner-slide.active {
+  opacity: 1;
+  z-index: 3;
+}
+
+/* Overlay para contraste */
+.banner-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 1;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.7);
+  z-index: 2;
+  max-width: 70%;
+}
+
+.banner-text h3 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.banner-text p {
+  font-size: 1.2rem;
+  margin-top: 8px;
+}
+
+/* Flechas de navegación */
+.banner-btn {
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.3s;
+}
+
+.banner-btn:hover {
+  background: rgba(0,0,0,0.6);
+}
+
+.banner-btn.left {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.banner-btn.right {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .banner-slider-container {
+    height: 250px;
+  }
+  .banner-text {
+    left: 5%;
+    max-width: 90%;
+  }
+  .banner-text h3 {
+    font-size: 1.4rem;
+  }
+  .banner-text p {
+    font-size: 1rem;
+  }
+}
