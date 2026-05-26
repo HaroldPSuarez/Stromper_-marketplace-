@@ -13,12 +13,20 @@
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
+/* ── IMAGEN: tamaño fijo, recorte centrado ── */
 .card-img-wrapper {
+  width: 100%;
+  height: 180px;        /* altura fija siempre */
   overflow: hidden;
   border-radius: 12px;
+  background: #f0f0f0;  /* placeholder mientras carga */
 }
 
 .card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* muestra el producto completo sin cortar */
+  object-position: center;
   transition: transform 0.3s ease;
 }
 
@@ -26,13 +34,22 @@
   transform: scale(1.05);
 }
 
+/* ── TEXTOS ─────────────────────────────── */
 .card h2 {
   margin-top: 12px;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.3;
+  /* evita que nombres largos rompan la card */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card p {
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 .precio-original {
@@ -45,26 +62,28 @@
 .precio-descuento {
   color: #28a745;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
+/* ── BOTÓN ───────────────────────────────── */
 .card button {
   width: 100%;
-  padding: 12px;
-  margin-top: 15px;
+  padding: 11px;
+  margin-top: 14px;
   border: none;
   border-radius: 10px;
   background: #111;
   color: white;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
 .card button:hover {
   background: #333;
 }
 
+/* ── BADGE DESCUENTO ─────────────────────── */
 .badge-descuento {
   position: absolute;
   top: 10px;
@@ -73,7 +92,7 @@
   color: #fff;
   padding: 4px 8px;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: bold;
   z-index: 10;
 }
