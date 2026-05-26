@@ -99,3 +99,18 @@ pip freeze > requirements.txt
 # =========================
 
 pip install -r requirements.txt
+
+EN caso de no se instala
+npm install react-router-dom
+y se puede correrr con
+npx vite
+
+al back se le instala cors
+pip install flask flask-cors
+
+la base de datos necesita este conector se instala en el back
+pip install flask flask-cors mysql-connector-python
+
+para la lectura de jwt se instala esta dependendia
+pip install flask-jwt-extended
+pip install flask flask-cors mysql-connector-python pyjwt werkzeug

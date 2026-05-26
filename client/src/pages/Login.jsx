@@ -6,7 +6,12 @@ import "./Login.css";
 
 function Login() {
   const [mode, setMode] = useState("login"); // "login" | "register"
-  const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+  });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
@@ -22,7 +27,8 @@ function Login() {
 
   function validateLogin() {
     const e = {};
-    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) e.email = "Email inválido";
+    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
+      e.email = "Email inválido";
     if (form.password.length < 6) e.password = "Mínimo 6 caracteres";
     return e;
   }
@@ -30,24 +36,33 @@ function Login() {
   function validateRegister() {
     const e = {};
     if (form.name.trim().length < 2) e.name = "Nombre muy corto";
-    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) e.email = "Email inválido";
+    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
+      e.email = "Email inválido";
     if (form.password.length < 6) e.password = "Mínimo 6 caracteres";
-    if (form.password !== form.confirm) e.confirm = "Las contraseñas no coinciden";
+    if (form.password !== form.confirm)
+      e.confirm = "Las contraseñas no coinciden";
     return e;
   }
 
   async function handleSubmit() {
     const errs = mode === "login" ? validateLogin() : validateRegister();
-    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
 
     setLoading(true);
     try {
-      const result = mode === "login"
-        ? await loginUser(form.email, form.password)
-        : await registerUser(form.name, form.email, form.password);
+      const result =
+        mode === "login"
+          ? await loginUser(form.email, form.password)
+          : await registerUser(form.name, form.email, form.password);
 
       if (result.ok) {
+        localStorage.setItem("token", result.token);
+
         login(result.user);
+
         navigate("/");
       } else {
         setServerError(result.message || "Ocurrió un error");
@@ -70,9 +85,14 @@ function Login() {
     <div className="login-page">
       {/* Panel izquierdo: branding */}
       <div className="login-brand">
-        <Link to="/" className="brand-logo">STROMPER</Link>
+        <Link to="/" className="brand-logo">
+          STROMPER
+        </Link>
         <h2>Tu tienda gamer favorita</h2>
-        <p>Los mejores periféricos, laptops y tecnología con descuentos exclusivos.</p>
+        <p>
+          Los mejores periféricos, laptops y tecnología con descuentos
+          exclusivos.
+        </p>
         <div className="brand-badges">
           <span>⚡ Envío rápido</span>
           <span>🔒 Compra segura</span>
@@ -111,7 +131,9 @@ function Login() {
                   placeholder="Tu nombre"
                   className={errors.name ? "error" : ""}
                 />
-                {errors.name && <span className="field-error">{errors.name}</span>}
+                {errors.name && (
+                  <span className="field-error">{errors.name}</span>
+                )}
               </div>
             )}
 
@@ -125,7 +147,9 @@ function Login() {
                 placeholder="tu@email.com"
                 className={errors.email ? "error" : ""}
               />
-              {errors.email && <span className="field-error">{errors.email}</span>}
+              {errors.email && (
+                <span className="field-error">{errors.email}</span>
+              )}
             </div>
 
             <div className="field-group">
@@ -138,7 +162,9 @@ function Login() {
                 placeholder="••••••••"
                 className={errors.password ? "error" : ""}
               />
-              {errors.password && <span className="field-error">{errors.password}</span>}
+              {errors.password && (
+                <span className="field-error">{errors.password}</span>
+              )}
             </div>
 
             {mode === "register" && (
@@ -152,7 +178,9 @@ function Login() {
                   placeholder="••••••••"
                   className={errors.confirm ? "error" : ""}
                 />
-                {errors.confirm && <span className="field-error">{errors.confirm}</span>}
+                {errors.confirm && (
+                  <span className="field-error">{errors.confirm}</span>
+                )}
               </div>
             )}
 
@@ -167,13 +195,18 @@ function Login() {
             >
               {loading
                 ? "Cargando..."
-                : mode === "login" ? "Iniciar sesión" : "Crear cuenta"}
+                : mode === "login"
+                  ? "Iniciar sesión"
+                  : "Crear cuenta"}
             </button>
 
             {mode === "login" && (
               <p className="login-hint">
                 ¿No tienes cuenta?{" "}
-                <button className="link-switch" onClick={() => switchMode("register")}>
+                <button
+                  className="link-switch"
+                  onClick={() => switchMode("register")}
+                >
                   Regístrate gratis
                 </button>
               </p>
@@ -182,7 +215,10 @@ function Login() {
             {mode === "register" && (
               <p className="login-hint">
                 ¿Ya tienes cuenta?{" "}
-                <button className="link-switch" onClick={() => switchMode("login")}>
+                <button
+                  className="link-switch"
+                  onClick={() => switchMode("login")}
+                >
                   Inicia sesión
                 </button>
               </p>
