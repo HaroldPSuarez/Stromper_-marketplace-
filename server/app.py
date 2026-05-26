@@ -12,11 +12,10 @@ products = [
     {
         "id": 1,
         "name": "Mouse Gamer",
-        "price": 120000,
         "image": "https://picsum.photos/300/200?1",
         "category": "Accesorios",
         "discount": 30,
-        "precioOriginal": 170000
+        "precioOriginal": 120000
     },
     {
         "id": 2,
